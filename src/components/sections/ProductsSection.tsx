@@ -128,10 +128,8 @@ import prod54 from "@/assets/Products_54.png?w=400&format=webp&as=src";
 import prod55 from "@/assets/Products_55.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod56 from "@/assets/Products_56.png?w=400&format=webp&as=src";
-// @ts-expect-error: vite-imagetools imports - handled at build time
-import prod57 from "@/assets/Products_57.png?w=400&format=webp&as=src";
-// @ts-expect-error: vite-imagetools imports - handled at build time
-import prod58  from "@/assets/Products_58.png?w=400&format=webp&as=src";
+// // @ts-expect-error: vite-imagetools imports - handled at build time
+// import prod57 from "@/assets/Products_57.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod59  from "@/assets/Products_59.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
@@ -142,8 +140,7 @@ import prod61  from "@/assets/Products_61.png?w=400&format=webp&as=src";
 import prod62  from "@/assets/Products_62.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod63  from "@/assets/Products_63.png?w=400&format=webp&as=src";
-// @ts-expect-error: vite-imagetools imports - handled at build time
-import prod64  from "@/assets/Products_64.png?w=400&format=webp&as=src";
+
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod65  from "@/assets/Products_65.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
@@ -257,41 +254,39 @@ const tagsAndLabels = [
   { id: 53, src: prod54 },
   { id: 54, src: prod55 },
   { id: 55, src: prod56 },
-  { id: 56, src: prod57 },
-  { id: 57, src: prod58 },
-  { id: 58, src: prod59 },
-  { id: 59, src: prod60 },
-  { id: 60, src: prod61 },
-  { id: 61, src: prod62 },
-  { id: 62, src: prod63 },
-  { id: 63, src: prod64 },
-  { id: 64, src: prod65 },
-  { id: 65, src: prod66 },
-  { id: 66, src: prod67 },
-  { id: 67, src: prod68 },
-  { id: 68, src: prod69 },
-  { id: 69, src: prod70 },
-  { id: 70, src: prod71 },
-  { id: 71, src: prod72 },
-  { id: 72, src: prod73 },
-  { id: 73, src: prod74 },
-  { id: 74, src: prod75 },
-  { id: 75, src: prod76 },
-  { id: 76, src: prod77 },
-  { id: 77, src: prod78 },
-  { id: 78, src: prod79 },
-  { id: 79, src: prod80 },
-  { id: 80, src: prod81 },
-  { id: 81, src: prod82 },
-  { id: 82, src: prod83 },
-  { id: 83, src: prod84 },
-  { id: 84, src: prod85 },
-  { id: 85, src: prod86 },
-  { id: 86, src: prod87 },
-  { id: 87, src: prod88 },
-  { id: 88, src: prod89 },
-  { id: 89, src: prod90 },
-  // { id: 90, src: prod91 },
+  // { id: 56, src: prod57 },
+  { id: 57, src: prod59 },
+  { id: 58, src: prod60 },
+  { id: 59, src: prod61 },
+  { id: 60, src: prod62 },
+  { id: 61, src: prod63 },
+  { id: 62, src: prod65 },
+  { id: 63, src: prod66 },
+  { id: 64, src: prod67 },
+  { id: 65, src: prod68 },
+  { id: 66, src: prod69 },
+  { id: 67, src: prod70 },
+  { id: 68, src: prod71 },
+  { id: 69, src: prod72 },
+  { id: 70, src: prod73 },
+  { id: 71, src: prod74 },
+  { id: 72, src: prod75 },
+  { id: 73, src: prod76 },
+  { id: 74, src: prod77 },
+  { id: 75, src: prod78 },
+  { id: 76, src: prod79 },
+  { id: 77, src: prod80 },
+  { id: 78, src: prod81 },
+  { id: 79, src: prod82 },
+  { id: 80, src: prod83 },
+  { id: 81, src: prod84 },
+  { id: 82, src: prod85 },
+  { id: 83, src: prod86 },
+  { id: 84, src: prod87 },
+  { id: 85, src: prod88 },
+  { id: 86, src: prod89 },
+  { id: 87, src: prod90 },
+  // { id: 89, src: prod91 },
 
 ] as const;
 
