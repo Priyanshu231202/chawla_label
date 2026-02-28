@@ -90,8 +90,8 @@ import prod35 from "@/assets/Products_35.png?w=400&format=webp&as=src";
 import prod36 from "@/assets/Products_36.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod37 from "@/assets/Products_37.png?w=400&format=webp&as=src";
-// @ts-expect-error: vite-imagetools imports - handled at build time
-import prod38 from "@/assets/Products_38.png?w=400&format=webp&as=src";
+
+import prod38 from "@/assets/Products_38.png";
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod39 from "@/assets/Products_39.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
