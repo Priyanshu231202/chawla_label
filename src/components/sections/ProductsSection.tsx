@@ -170,6 +170,34 @@ import prod75  from "@/assets/Products_75.png?w=400&format=webp&as=src";
 import prod76  from "@/assets/Products_76.png?w=400&format=webp&as=src";
 // @ts-expect-error: vite-imagetools imports - handled at build time
 import prod77  from "@/assets/Products_77.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod78  from "@/assets/Products_78.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod79  from "@/assets/Products_79.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod80  from "@/assets/Products_80.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod81  from "@/assets/Products_81.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod82  from "@/assets/Products_82.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod83  from "@/assets/Products_83.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod84  from "@/assets/Products_84.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod85  from "@/assets/Products_85.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod86  from "@/assets/Products_86.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod87  from "@/assets/Products_87.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod88  from "@/assets/Products_88.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod89  from "@/assets/Products_89.png?w=400&format=webp&as=src";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import prod90  from "@/assets/Products_90.png?w=400&format=webp&as=src";
+// // @ts-expect-error: vite-imagetools imports - handled at build time
+// import prod91  from "@/assets/Products_91.png?w=400&format=webp&as=src";
 import OptimizedImage from "@/components/ui/optimized-image";
 
 const tagsAndLabels = [
@@ -250,6 +278,20 @@ const tagsAndLabels = [
   { id: 74, src: prod75 },
   { id: 75, src: prod76 },
   { id: 76, src: prod77 },
+  { id: 77, src: prod78 },
+  { id: 78, src: prod79 },
+  { id: 79, src: prod80 },
+  { id: 80, src: prod81 },
+  { id: 81, src: prod82 },
+  { id: 82, src: prod83 },
+  { id: 83, src: prod84 },
+  { id: 84, src: prod85 },
+  { id: 85, src: prod86 },
+  { id: 86, src: prod87 },
+  { id: 87, src: prod88 },
+  { id: 88, src: prod89 },
+  { id: 89, src: prod90 },
+  // { id: 90, src: prod91 },
 
 ] as const;
 
@@ -484,7 +526,7 @@ const ProductsSection = memo(() => {
             <ProductRow
               id="category-labels"
               title={t.products.categories.labels}
-              items={tagsAndLabels.slice(0, 16)}
+              items={tagsAndLabels.slice(0, 22)}
               openLightbox={openLightbox}
               startIndex={0}
               direction="left"
@@ -493,27 +535,27 @@ const ProductsSection = memo(() => {
             <ProductRow
               id="category-tags"
               title={t.products.categories.tags}
-              items={tagsAndLabels.slice(17, 32)}
+              items={tagsAndLabels.slice(23, 45)}
               openLightbox={openLightbox}
-              startIndex={17}
+              startIndex={23}
               direction="right"
               large={true}
             />
             <ProductRow
               id="category-stickers"
               title={t.products.categories.stickers}
-              items={tagsAndLabels.slice(33, 48)}
+              items={tagsAndLabels.slice(46, 68)}
               openLightbox={openLightbox}
-              startIndex={33}
+              startIndex={46}
               direction="left"
               large={true}
             />
             <ProductRow
               id="category-trending"
               title={t.products.categories.trending}
-              items={tagsAndLabels.slice(49, 63)}
+              items={tagsAndLabels.slice(69, 91)}
               openLightbox={openLightbox}
-              startIndex={49}
+              startIndex={69}
               direction="right"
               large={true}
             />
