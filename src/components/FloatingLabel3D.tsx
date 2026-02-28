@@ -1,6 +1,6 @@
 import { useRef, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { RoundedBox, Float, Environment } from "@react-three/drei";
+import { RoundedBox, Float } from "@react-three/drei";
 import * as THREE from "three";
 
 interface LabelProps {
@@ -257,18 +257,44 @@ function Scene() {
         scale={0.4}
       />
 
-      <Environment preset="city" />
+      <directionalLight position={[0, -5, 0]} intensity={0.2} />
+      <pointLight position={[5, -5, -5]} intensity={0.4} color="#f5e6d3" />
     </>
   );
 }
 
+function canUseWebGL(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    const gl = canvas.getContext("webgl") || canvas.getContext("webgl2");
+    return !!gl;
+  } catch {
+    return false;
+  }
+}
+
 export default function FloatingLabel3D() {
+  const supportsWebGL = canUseWebGL();
+
+  if (!supportsWebGL) {
+    return (
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-primary/5 to-primary/10 rounded-lg" />
+    );
+  }
+
   return (
     <div className="absolute inset-0 pointer-events-none">
       <Canvas
         camera={{ position: [0, 0, 6], fov: 45 }}
         style={{ background: "transparent" }}
-        gl={{ alpha: true, antialias: true }}
+        gl={{
+          alpha: true,
+          antialias: true,
+          powerPreference: "low-power",
+        }}
+        onCreated={(state) => {
+          state.gl.setClearColor(new THREE.Color(0, 0, 0), 0);
+        }}
       >
         <Suspense fallback={null}>
           <Scene />

@@ -7,13 +7,20 @@ type Props = React.ImgHTMLAttributes<HTMLImageElement> & {
   sizes?: string;
 };
 
-const OptimizedImage: React.FC<Props> = ({
+const OptimizedImage: React.FC<
+  Props & {
+    unstyled?: boolean;
+    objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down";
+  }
+> = ({
   src,
   alt,
   className,
   priority = false,
   srcSet,
   sizes,
+  unstyled = false,
+  objectFit = "cover",
   width,
   height,
   style,
@@ -22,6 +29,7 @@ const OptimizedImage: React.FC<Props> = ({
 }) => {
   const imgRef = useRef<HTMLImageElement | null>(null);
   const [visible, setVisible] = useState<boolean>(!!priority);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (visible) return;
@@ -38,21 +46,16 @@ const OptimizedImage: React.FC<Props> = ({
             }
           });
         },
-        { rootMargin: "200px" },
+        { rootMargin: "400px" },
       );
 
       obs.observe(imgRef.current);
       return () => obs.disconnect();
     }
 
-    // Fallback: mark visible immediately
     setVisible(true);
   }, [visible]);
 
-  const loading = priority ? "eager" : "lazy";
-  // Some React versions warn about unknown DOM props like `fetchPriority`.
-  // Set the attribute directly on the DOM node when priority is needed
-  // to avoid React warnings while still hinting the browser.
   useEffect(() => {
     const img = imgRef.current;
     if (!img) return;
@@ -60,27 +63,38 @@ const OptimizedImage: React.FC<Props> = ({
       try {
         img.setAttribute("fetchpriority", "high");
       } catch (e) {
-        // ignore if attribute isn't supported
+        // ignore
       }
     }
-  }, [priority, visible]);
+  }, [priority]);
 
   return (
-    <img
-      ref={imgRef}
-      src={visible ? src : undefined}
-      srcSet={visible && srcSet ? srcSet : undefined}
-      sizes={visible && sizes ? sizes : undefined}
-      alt={alt}
-      className={className}
-      loading={loading}
-      decoding="async"
-      width={width}
-      height={height}
-      style={style}
-      onClick={onClick}
-      {...rest}
-    />
+    <div
+      className={`relative ${unstyled ? "" : "overflow-hidden bg-muted/20"} ${className}`}
+    >
+      {/* Shimmer Effect while loading */}
+      {!loaded && !unstyled && (
+        <div className="absolute inset-0 z-0 bg-muted animate-pulse overflow-hidden">
+          <div className="h-full w-full bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 translate-x-[-100%] animate-[shimmer_2s_infinite]" />
+        </div>
+      )}
+
+      <img
+        ref={imgRef}
+        src={src}
+        srcSet={srcSet}
+        sizes={sizes}
+        alt={alt}
+        className={`w-full h-full transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-50"}`}
+        style={{ objectFit: objectFit }}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        onLoad={() => setLoaded(true)}
+        onError={() => setLoaded(true)}
+        onClick={onClick}
+        {...rest}
+      />
+    </div>
   );
 };
 

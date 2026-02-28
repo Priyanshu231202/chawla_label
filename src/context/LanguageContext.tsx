@@ -12,15 +12,18 @@ type Language = "en" | "ja";
 interface Translations {
   // Navbar
   nav: {
+    home: string;
     gallery: string;
     about: string;
     blog: string;
     faqs: string;
     contact: string;
+    getQuote: string;
   };
   // Hero
   hero: {
     badge: string;
+    welcomeTo: string;
     heading: string;
     typeLabels: string[];
     subtext: string;
@@ -42,6 +45,8 @@ interface Translations {
   };
   // Features
   features: {
+    heading: string;
+    highlight: string;
     items: {
       title: string;
       description: string;
@@ -52,6 +57,12 @@ interface Translations {
     heading: string;
     subtext: string;
     clickPreview: string;
+    categories: {
+      labels: string;
+      tags: string;
+      stickers: string;
+      trending: string;
+    };
   };
   // Blog
   blog: {
@@ -118,23 +129,43 @@ interface Translations {
       company: { label: string }[];
       support: { label: string }[];
     };
+    phone1: string;
+    phone2: string;
+    email: string;
+    unitOf: string;
+  };
+  // Thank You Page
+  thanks: {
+    title: string;
+    titleAccent: string;
+    message: string;
+    backHome: string;
+  };
+  // Not Found Page
+  notfound: {
+    title: string;
+    message: string;
+    backHome: string;
   };
 }
 
 const en: Translations = {
   nav: {
+    home: "HOME",
     gallery: "Gallery",
     about: "About Us",
     blog: "Blog",
     faqs: "FAQS",
     contact: "Contact Us",
+    getQuote: "GET A QUOTE",
   },
   hero: {
     badge: "Premium Quality Printing Since 1974",
+    welcomeTo: "Welcome to",
     heading: "Elevate Your Brand with",
     typeLabels: ["Labels", "Stickers", "Tags"],
     subtext:
-      "From high-quality clothing tags to bespoke labels. We craft the professional finish your products deserve. Fast turnaround, premium materials.",
+      "From high-quality tags and bespoke labels to premium stickers, we craft the professional finish your products deserve - with fast turnaround and superior materials.",
     getQuote: "Get a Quote",
     viewGallery: "View Gallery",
     bulkOrders: "Bulk Orders",
@@ -142,47 +173,49 @@ const en: Translations = {
     fastShipping: "Fast Shipping",
   },
   about: {
-    heading: "All About the",
+    heading: "About the",
     brand: "Brand",
     desc1:
-      "is a leading name in the garment and textile industry, specializing in high-quality tags and labels. For years, we have served businesses across various sectors, providing custom solutions that meet their unique branding needs.",
+      "(A Unit of CHAWLA LABEL CO.) is a leading name in the garment and textile industry, specializing in high-quality tags, labels and stickers. For years, we have served businesses across various sectors, providing custom solutions that meet their unique branding needs.",
     desc2:
       "Our commitment to excellence, state-of-the-art technology, and a dedicated team of professionals ensures that every product we deliver is of the highest standard. We believe in building lasting partnerships with our clients by offering reliable, efficient, and creative printing services.",
     yearsExperience: "Years Experience",
     happyClients: "Happy Clients",
-    labelsDelivered: "Labels Delivered",
+    labelsDelivered: "Products Delivered",
   },
   features: {
+    heading: "Why Choose",
+    highlight: "Us",
     items: [
       {
-        title: "Best Service",
+        title: "Unmatched Quality",
         description:
-          "We provide one-on-one professional service and inform via Email or WhatsApp. also we have professional presales and aftersales services.",
+          "Accurate and clear barcode labels for seamless inventory management and point-of-sale operations.",
       },
       {
         title: "Competitive Price",
         description:
-          "We are a manufacturer and supplier from China, so we are able to give the advantage.",
+          "Being a direct manufacturer and supplier from India allows us to provide the best prices.",
       },
       {
-        title: "High Efficiency",
+        title: "On - Time Delivery",
         description:
-          "With ten years experience, we can quickly provide you best customized solutions, saving your time. Production time of the most products is 10-15 business days.",
+          "We respect your deadlines and ensure your orders are delivered promptly, every time.",
       },
       {
-        title: "Quality Guarantee",
+        title: "Complete Customisation",
         description:
-          "No matter material or process, we can produce based on your requirements. We will manually check each order to ensure products quality.",
+          "From design to material, we offer bespoke solutions tailored to your specific needs",
       },
       {
         title: "Low MOQ",
         description:
-          "A few? Or tens of thousands? We at the same time meet the customization needs of large and small businesses.",
+          "(Minimum Order Quantity) A few? Or tens of thousands? We at the same time meet the customization needs of large and small businesses.",
       },
       {
-        title: "Free Design",
+        title: "Dedicated Support",
         description:
-          "Need a new design? Our professional designers have rich experience in tags, logo design, etc., and can provide free design and 3D draft.",
+          "Our friendly team is always ready to assist you, from design consultation to after-sales service.",
       },
     ],
   },
@@ -191,6 +224,12 @@ const en: Translations = {
     subtext:
       "High quality tags and labels include hang tags, hang tag strings, buttons, woven labels, printed labels, metal tags, leather labels, stickers, embroidered patches, woven patches, TPU labels, PVC labels, zipper puller, webbing, etc.",
     clickPreview: "Click to preview",
+    categories: {
+      labels: "Labels",
+      tags: "Tags",
+      stickers: "Stickers",
+      trending: "Trending",
+    },
   },
   blog: {
     heading: "Latest",
@@ -285,40 +324,61 @@ const en: Translations = {
   },
   footer: {
     tagline:
-      "Premium branding solutions for the fashion industry. Elevate your brand with custom labels, tags, and stickers.",
+      "A.S. PRINTERS (A unit of CHAWLA LABEL CO.) — Premium branding solutions for the fashion industry. Elevate your brand with custom labels, tags, and stickers.",
     products: "Products",
     company: "Company",
     support: "Support",
     certifiedBy: "Certified By",
-    companyName: "AS PRINTERS",
-    copyright: "AS PRINTERS. All rights reserved. By",
+    companyName: "A.S. PRINTERS",
+    copyright:
+      "A.S. PRINTERS (A unit of CHAWLA LABEL CO.). All rights reserved. By",
     by: "WeGrow Consultancy and Solution",
     links: {
       products: [
-        { label: "Hang Tags" },
-        { label: "Woven Labels" },
-        { label: "Printed Labels" },
+        { label: "Tags" },
+        { label: "Stickers" },
+        { label: "Labels" },
+        { label: "Trending" },
       ],
       company: [
         { label: "About Us" },
         { label: "Why Choose Us" },
         { label: "Blog" },
       ],
-      support: [{ label: "FAQs" }, { label: "Contact" }],
+      support: [{ label: "FAQs" }, { label: "Contact Us" }],
     },
+    phone1: "+91 9873705056",
+    phone2: "+91 7217667783",
+    email: "chawla@chawlalabel.com",
+    unitOf: "A unit of CHAWLA LABEL CO.",
+  },
+  thanks: {
+    title: "Thank",
+    titleAccent: "You!",
+    message:
+      "Your message has been sent successfully. We'll get back to you as soon as possible. Thank you for reaching out to AS PRINTERS!",
+    backHome: "Back to Home",
+  },
+  notfound: {
+    title: "404 - Page Not Found",
+    message: "Oops! The page you're looking for doesn't exist.",
+    backHome: "Return to Home",
   },
 };
 
 const ja: Translations = {
   nav: {
+    home: "ホーム",
     gallery: "ギャラリー",
     about: "会社概要",
     blog: "ブログ",
     faqs: "よくある質問",
     contact: "お問い合わせ",
+    getQuote: "見積もりを取得",
   },
   hero: {
     badge: "1974年以来のプレミアム品質印刷",
+    welcomeTo: "へようこそ",
     heading: "ブランドを高める",
     typeLabels: ["ラベル", "ステッカー", "タグ"],
     subtext:
@@ -331,16 +391,18 @@ const ja: Translations = {
   },
   about: {
     heading: "ブランドについて",
-    brand: "",
+    brand: "ブランド",
     desc1:
       "は衣料品・繊維業界をリードする企業であり、高品質のタグおよびラベルを専門としています。長年にわたり、様々な分野の企業にカスタムソリューションを提供してきました。",
     desc2:
       "卓越性へのこだわり、最先端技術、そして専門家チームにより、お届けするすべての製品で最高水準を維持しています。信頼性が高く、効率的で創造的な印刷サービスを通じて、お客様との長期的なパートナーシップを築くことを大切にしています。",
     yearsExperience: "年の経験",
-    happyClients: "満足のお客様",
-    labelsDelivered: "納品済みラベル",
+    happyClients: "満足したお客様",
+    labelsDelivered: "納品された製品",
   },
   features: {
+    heading: "選ばれる",
+    highlight: "理由",
     items: [
       {
         title: "最高のサービス",
@@ -353,9 +415,9 @@ const ja: Translations = {
           "メーカー兼サプライヤーとして、お客様に有利な価格を提供できます。",
       },
       {
-        title: "高い効率性",
+        title: "10年以上の経験",
         description:
-          "10年以上の経験により、最適なカスタムソリューションを迅速に提案します。多くの製品の製造期間は10〜15営業日です。",
+          "最適なカスタムソリューションを迅速に提案します。多くの製品の製造期間は10〜15営業日です。",
       },
       {
         title: "品質保証",
@@ -379,6 +441,12 @@ const ja: Translations = {
     subtext:
       "高品質のタグとラベルには、ハングタグ、ハングタグストリング、ボタン、織りラベル、プリントラベル、金属タグ、レザーラベル、ステッカー、刺繍パッチ、TPUラベル、PVCラベル、ジッパープラー、ウェビングなどが含まれます。",
     clickPreview: "クリックしてプレビュー",
+    categories: {
+      labels: "ラベル",
+      tags: "タグ",
+      stickers: "ステッカー",
+      trending: "トレンド",
+    },
   },
   blog: {
     heading: "最新の",
@@ -477,19 +545,21 @@ const ja: Translations = {
   },
   footer: {
     tagline:
-      "ファッション業界向けのプレミアムブランディングソリューション。カスタムラベル、タグ、ステッカーでブランドを高めましょう。",
+      "Chawla Labelの一部門 — ファッション業界向けのプレミアムブランディングソリューション。カスタムラベル、タグ、ステッカーでブランドを高めましょう。",
     products: "製品",
     company: "会社情報",
     support: "サポート",
     certifiedBy: "認定機関",
-    companyName: "ASプリンターズ",
-    copyright: "ASプリンターズ. 全著作権所有. By",
-    by: "WeGrow コンサルタンシー・アンド・ソリューション",
+    companyName: "A.S. PRINTERS",
+    copyright:
+      "A.S. PRINTERS（Chawla Labelの一部門）. 無断転載を禁じます. 制作：",
+    by: "WeGrow Consultancy and Solution",
     links: {
       products: [
-        { label: "衣料品タグ" },
-        { label: "バーコードラベル" },
-        { label: "カスタムステッカー" },
+        { label: "タグ" },
+        { label: "ステッカー" },
+        { label: "ラベル" },
+        { label: "トレンド" },
       ],
       company: [
         { label: "会社概要" },
@@ -498,6 +568,22 @@ const ja: Translations = {
       ],
       support: [{ label: "よくある質問" }, { label: "お問い合わせ" }],
     },
+    phone1: "+91 9873705056",
+    phone2: "+91 7217667783",
+    email: "chawla@chawlalabel.com",
+    unitOf: "Chawla Label CO.の一部門",
+  },
+  thanks: {
+    title: "ありがとう",
+    titleAccent: "ございます！",
+    message:
+      "メッセージは正常に送信されました。できるだけ早くご連絡いたします。AS PRINTERSにお問い合わせいただき、ありがとうございました！",
+    backHome: "ホームに戻る",
+  },
+  notfound: {
+    title: "404 - ページが見つかりません",
+    message: "お探しのページは存在しないようです。",
+    backHome: "ホームに戻る",
   },
 };
 
@@ -516,9 +602,19 @@ const LanguageContext = createContext<LanguageContextType>({
 });
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLang] = useState<Language>("en");
+  const [language, setLang] = useState<Language>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("app_lang");
+      return (saved as Language) || "en";
+    }
+    return "en";
+  });
 
-  const setLanguage = useCallback((lang: Language) => setLang(lang), []);
+  const setLanguage = useCallback((lang: Language) => {
+    setLang(lang);
+    localStorage.setItem("app_lang", lang);
+  }, []);
+
   const t = useMemo(() => translations[language], [language]);
   const value = useMemo(
     () => ({ language, setLanguage, t }),

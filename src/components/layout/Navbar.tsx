@@ -1,14 +1,13 @@
 import { useState, useEffect, useCallback, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
+import { useTheme } from "@/context/ThemeContext";
 
 import OptimizedImage from "@/components/ui/optimized-image";
 
 // @ts-expect-error: vite-imagetools import - handled at build time
-import logoSrc from "@/assets/chawlaaa-logo.png?w=384&as=src";
-// @ts-expect-error: vite-imagetools import - handled at build time
-import logoSrcset from "@/assets/chawlaaa-logo.png?w=96;192;384&as=srcset";
+import logoSrc from "@/assets/chawlaaa-logo.png?w=384&format=webp&as=src";
 
 // Stable nav variant objects outside component — never recreated
 const navVariants = {
@@ -28,10 +27,11 @@ const Navbar = memo(() => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { language, setLanguage, t } = useLanguage();
+  const { theme, setTheme } = useTheme();
 
   const navLinks = [
-    { href: "#tags", label: t.nav.gallery },
     { href: "#about", label: t.nav.about },
+    { href: "#gallery", label: t.nav.gallery },
     { href: "#blog", label: t.nav.blog },
     { href: "#faqs", label: t.nav.faqs },
     { href: "#contact", label: t.nav.contact },
@@ -59,74 +59,143 @@ const Navbar = memo(() => {
         initial={navVariants.initial}
         animate={navVariants.animate}
         transition={navVariants.transition}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-background/95 backdrop-blur-md shadow-sm border-b border-border/50"
-            : "bg-background border-b border-border/30"
+            ? "bg-white dark:bg-slate-900 border-b border-slate-100 dark:border-slate-800 py-1.5 shadow-lg"
+            : "bg-transparent py-2.5"
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-28">
-            {/* Brand Logo */}
-            <div className="flex flex-col items-center">
-              <a href="/" className="flex items-center">
+        <div className="max-w-[1400px] mx-auto px-6 lg:px-10">
+          <div className="flex items-center justify-between h-16 md:h-22">
+            {/* Brand Logo - Left */}
+            <div className="flex-shrink-0">
+              <a href="/" className="flex items-center gap-3 group">
                 <OptimizedImage
                   src={logoSrc}
-                  srcSet={logoSrcset}
-                  sizes="96px"
-                  alt="AS PRINTERS Logo"
-                  className="h-24 w-auto object-contain"
-                  width={96}
-                  height={96}
+                  sizes="120px"
+                  alt={`${t.footer.companyName} Logo`}
+                  unstyled={true}
+                  objectFit="contain"
+                  className={`h-12 md:h-16 lg:h-20 w-auto transition-all duration-300 group-hover:scale-105 ${
+                    isScrolled
+                      ? "brightness-90 contrast-125 dark:brightness-100"
+                      : "brightness-110"
+                  }`}
+                  width={240}
+                  height={120}
                   priority
                 />
               </a>
             </div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-8 ml-auto text-sm">
-              {navLinks.map((link) => (
-                <div key={link.href} className="relative">
+            {/* Desktop Navigation - Center */}
+            <div className="hidden lg:flex items-center justify-center flex-1 px-10">
+              <div className="flex items-center gap-8 xl:gap-12">
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className={`text-[18px] font-bold tracking-[0.2em] transition-all relative group uppercase ${
+                    isScrolled
+                      ? "text-slate-900 dark:text-white"
+                      : "text-white/90"
+                  }`}
+                >
+                  {t.nav.home}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
+                </a>
+                {navLinks.map((link) => (
                   <a
+                    key={link.href}
                     href={link.href}
-                    className="text-2xl font-bold text-foreground/90 hover:text-primary transition-colors flex items-center gap-1 group py-4"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const sectionId = link.href.replace("#", "");
+                      const target = document.getElementById(sectionId);
+                      if (target) {
+                        target.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                      }
+                    }}
+                    className={`text-[18px] font-bold tracking-[0.2em] transition-all relative group uppercase ${
+                      isScrolled
+                        ? "text-slate-900 dark:text-white"
+                        : "text-white/90"
+                    }`}
                   >
                     {link.label}
+                    <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
                   </a>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
 
-              {/* Language Toggle */}
+            {/* Desktop Actions - Right */}
+            <div className="hidden lg:flex items-center gap-6 xl:gap-8">
               <motion.button
                 onClick={toggleLanguage}
-                whileTap={{ scale: 0.92 }}
-                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`text-xs font-bold tracking-widest transition-colors ${
+                  isScrolled
+                    ? "text-slate-600 hover:text-slate-900 dark:text-white"
+                    : "text-white/70 hover:text-white"
+                }`}
                 title={
-                  language === "en" ? "Switch to Japanese" : "英語に切り替え"
+                  language === "en" ? "Change to Japanese" : "日本語に切り替え"
                 }
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full border border-border/50 bg-muted/30 hover:bg-muted/60 transition-all duration-200 text-sm font-semibold text-foreground/80 hover:text-foreground select-none"
               >
-                <span className="text-lg leading-none">
-                  {language === "en" ? "🇯🇵" : "🇬🇧"}
-                </span>
-                <span className="text-xs font-bold tracking-wide">
-                  {language === "en" ? "日本語" : "EN"}
-                </span>
+                {language === "en" ? "日本語" : "EN"}
+              </motion.button>
+
+              <motion.button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                whileTap={{ scale: 0.95 }}
+                className={`p-2 rounded-full transition-colors ${
+                  isScrolled
+                    ? "text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-white dark:hover:bg-white/10"
+                    : "text-white/70 hover:text-white hover:bg-white/10"
+                }`}
+                title={
+                  theme === "dark"
+                    ? "Switch to Light Mode"
+                    : "Switch to Dark Mode"
+                }
+              >
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </motion.button>
             </div>
 
             {/* Mobile Actions */}
-            <div className="flex items-center gap-2 lg:hidden">
+            <div className="flex items-center gap-4 lg:hidden">
               <button
                 onClick={toggleLanguage}
-                className="p-1.5 rounded-full border border-border/40 bg-muted/30 text-sm font-bold"
-                title="Toggle Language"
+                className={`text-xs font-bold tracking-widest ${
+                  isScrolled
+                    ? "text-slate-600 dark:text-white"
+                    : "text-white/70"
+                }`}
               >
-                {language === "en" ? "🇯🇵" : "🇬🇧"}
+                {language === "en" ? "日本語" : "EN"}
+              </button>
+              <button
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className={`p-2 transition-colors ${
+                  isScrolled
+                    ? "text-slate-600 dark:text-white"
+                    : "text-white/70"
+                }`}
+              >
+                {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
               </button>
               <button
                 onClick={toggleMobile}
-                className="p-2 text-foreground text-xl"
+                className={`p-2 transition-colors ${
+                  isScrolled ? "text-slate-900 dark:text-white" : "text-white"
+                }`}
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? (
@@ -148,21 +217,47 @@ const Navbar = memo(() => {
             animate={mobileMenuVariants.animate}
             exit={mobileMenuVariants.exit}
             transition={mobileMenuVariants.transition}
-            className="fixed top-28 bottom-0 left-0 right-0 z-40 bg-background lg:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl lg:hidden flex flex-col items-center justify-center"
           >
-            <div className="container mx-auto px-6 py-6">
-              <div className="flex flex-col gap-2">
+            <div className="container mx-auto px-10">
+              <div className="flex flex-col items-center gap-8">
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    closeMobile();
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                  className="text-2xl font-bold tracking-[0.2em] text-white/90 hover:text-primary transition-colors py-2 uppercase"
+                >
+                  {t.nav.home}
+                </a>
                 {navLinks.map((link) => (
                   <div key={link.href}>
-                    <button
-                      onClick={() => {
+                    <a
+                      href={link.href}
+                      onClick={(e) => {
+                        e.preventDefault();
                         closeMobile();
-                        window.location.href = link.href;
+
+                        // Extract the section ID from href
+                        const sectionId = link.href.replace("#", "");
+                        const target = document.getElementById(sectionId);
+
+                        if (target) {
+                          // Wait for menu animation to finish before scrolling
+                          setTimeout(() => {
+                            target.scrollIntoView({
+                              behavior: "smooth",
+                              block: "start",
+                            });
+                          }, 300);
+                        }
                       }}
-                      className="w-full text-left text-xl font-semibold text-foreground hover:text-primary transition-colors py-3 border-b border-border/30 flex items-center justify-between"
+                      className="text-2xl font-bold tracking-[0.2em] text-white/90 hover:text-primary transition-colors py-2 uppercase"
                     >
                       {link.label}
-                    </button>
+                    </a>
                   </div>
                 ))}
               </div>

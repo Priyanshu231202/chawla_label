@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 
-// Stable animation configs — defined once, never recreated
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -25,7 +25,7 @@ const AboutSection = memo(() => {
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
+        <div className="w-full">
           <motion.div
             {...fadeUp}
             whileInView={fadeUp.animate}
@@ -46,40 +46,44 @@ const AboutSection = memo(() => {
             whileInView={cardAnim.animate}
             viewport={viewportOpts}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="glass-card p-6 md:p-12"
+            className="w-full"
           >
-            <div className="space-y-6 text-center">
-              <p className="text-base leading-relaxed text-foreground">
-                <span className="font-semibold text-primary">AS PRINTERS</span>{" "}
-                {t.about.desc1}
-              </p>
+            <div className="space-y-10 text-center">
+              <div className="space-y-6 max-w-5xl mx-auto">
+                <p className="text-lg md:text-2xl leading-relaxed text-foreground">
+                  <span className="font-bold text-primary">
+                    {t.footer.companyName}
+                  </span>{" "}
+                  {t.about.desc1}
+                </p>
 
-              <p className="text-base leading-relaxed text-muted-foreground">
-                {t.about.desc2}
-              </p>
+                <p className="text-lg md:text-2xl leading-relaxed text-muted-foreground">
+                  {t.about.desc2}
+                </p>
+              </div>
 
-              <div className="flex flex-wrap justify-center gap-8 pt-6 border-t border-border">
-                <div className="text-center">
-                  <div className="font-display text-3xl font-bold gradient-text">
-                    0
+              <div className="flex flex-wrap justify-center gap-12 md:gap-24 pt-12 border-t border-border/20">
+                <div className="text-center group">
+                  <div className="font-display text-4xl md:text-6xl font-bold gradient-text mb-2 group-hover:scale-110 transition-transform">
+                    <AnimatedCounter to={30} duration={2.5} suffix="+" />
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm md:text-base text-muted-foreground uppercase tracking-widest font-semibold">
                     {t.about.yearsExperience}
                   </div>
                 </div>
-                <div className="text-center">
-                  <div className="font-display text-3xl font-bold gradient-text">
-                    0
+                <div className="text-center group">
+                  <div className="font-display text-4xl md:text-6xl font-bold gradient-text mb-2 group-hover:scale-110 transition-transform">
+                    <AnimatedCounter to={10000} duration={2.5} suffix="+" />
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm md:text-base text-muted-foreground uppercase tracking-widest font-semibold">
                     {t.about.happyClients}
                   </div>
                 </div>
-                <div className="text-center">
-                  <div className="font-display text-3xl font-bold gradient-text">
-                    0
+                <div className="text-center group">
+                  <div className="font-display text-4xl md:text-6xl font-bold gradient-text mb-2 group-hover:scale-110 transition-transform">
+                    <AnimatedCounter to={10876000} duration={2.5} suffix="+" />
                   </div>
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm md:text-base text-muted-foreground uppercase tracking-widest font-semibold">
                     {t.about.labelsDelivered}
                   </div>
                 </div>

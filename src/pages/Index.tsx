@@ -8,6 +8,7 @@ import { LazySection } from "@/components/LazySection";
 const ProductsSection = lazy(
   () => import("@/components/sections/ProductsSection"),
 );
+
 const FeaturesSection = lazy(
   () => import("@/components/sections/FeaturesSection"),
 );
@@ -32,27 +33,26 @@ const Index = memo(() => {
         {/* HeroSection is above the fold — eagerly loaded */}
         <HeroSection />
 
-        <LazySection fallback={Loader}>
+        <LazySection id="about" fallback={Loader}>
+          <AboutSection />
+        </LazySection>
+        <LazySection id="gallery" fallback={Loader}>
           <ProductsSection />
         </LazySection>
 
-        <LazySection fallback={Loader}>
+        <LazySection id="features" fallback={Loader}>
           <FeaturesSection />
         </LazySection>
 
-        <LazySection fallback={Loader}>
-          <AboutSection />
-        </LazySection>
-
-        <LazySection fallback={Loader}>
+        <LazySection id="blog" fallback={Loader}>
           <BlogSection />
         </LazySection>
 
-        <LazySection fallback={Loader}>
+        <LazySection id="faqs" fallback={Loader}>
           <FAQSection />
         </LazySection>
 
-        <LazySection fallback={Loader}>
+        <LazySection id="contact" fallback={Loader}>
           <ContactSection />
         </LazySection>
       </main>

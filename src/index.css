@@ -81,27 +81,27 @@
 
   .dark {
     --background: 280 25% 8%;
-    --foreground: 280 30% 95%;
+    --foreground: 0 0% 100%;
 
     --card: 280 25% 12%;
-    --card-foreground: 280 30% 95%;
+    --card-foreground: 0 0% 100%;
 
     --popover: 280 25% 12%;
-    --popover-foreground: 280 30% 95%;
+    --popover-foreground: 0 0% 100%;
 
     /* Primary - Vibrant Purple in dark mode */
     --primary: 275 70% 55%;
     --primary-foreground: 280 25% 8%;
 
     --secondary: 280 25% 18%;
-    --secondary-foreground: 280 30% 95%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 280 25% 18%;
-    --muted-foreground: 280 15% 60%;
+    --muted-foreground: 0 0% 80%;
 
     /* Accent - Deep Plum in dark mode */
     --accent: 280 60% 50%;
-    --accent-foreground: 280 30% 95%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 45%;
     --destructive-foreground: 0 0% 100%;
@@ -263,4 +263,35 @@ html {
 
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--primary) / 0.5);
+}
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+  .is-mobile .blur-3xl {
+    filter: blur(40px); /* Lower blur for better performance */
+  }
+
+  .is-mobile .glass-card {
+    backdrop-filter: blur(8px); /* Lower backdrop blur */
+    background: hsl(var(--background) / 0.9);
+  }
+
+  .is-mobile * {
+    text-rendering: optimizeSpeed;
+  }
+
+  /* Disable expensive shadows on mobile scrolling items */
+  .is-mobile .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px hsl(var(--primary) / 0.1);
+  }
 }

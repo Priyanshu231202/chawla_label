@@ -1,44 +1,89 @@
-import React, { Suspense, lazy } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import React from "react";
+import { ArrowRight, ChevronDown } from "lucide-react";
+import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { useLanguage } from "@/context/LanguageContext";
+import heroVideo from "@/assets/hero-video.mp4";
+// @ts-expect-error: vite-imagetools imports - handled at build time
+import heroPoster from "@/assets/Hero.png?w=640;1280;1920&format=webp&as=metadata";
 
-const FloatingLabel3D = lazy(() => import("../FloatingLabel3D"));
+declare global {
+  interface Window {
+    isMobile?: boolean;
+  }
+}
 
 const HeroSection = () => {
   const { t, language } = useLanguage();
 
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
   return (
-    <div className="relative w-full bg-background overflow-hidden px-4 md:px-6">
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a2e' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
+    <div className="relative w-full h-screen min-h-[600px] overflow-hidden flex items-center justify-center">
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster={heroPoster.src}
+          preload={
+            typeof window !== "undefined" && window.isMobile ? "none" : "auto"
+          }
+          className="w-full h-full object-cover"
+        >
+          {!(typeof window !== "undefined" && window.isMobile) && (
+            <source src={heroVideo} type="video/mp4" />
+          )}
+
+          <div className="w-full h-full bg-black/60" />
+        </video>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/60" />
       </div>
 
-      {/* 3D Labels */}
-      <Suspense fallback={null}>
-        <FloatingLabel3D />
-      </Suspense>
+      {/* Hero Content */}
+      <div className="relative z-10 container mx-auto px-4 text-center text-white max-w-5xl">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="space-y-6 md:space-y-8"
+        >
+          <div className="space-y-4">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-[0.02em] font-serif text-white uppercase opacity-90">
+              {language === "en" ? (
+                <>
+                  {t.hero.welcomeTo}{" "}
+                  <span className="text-white whitespace-nowrap">
+                    {t.footer.companyName}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="text-white whitespace-nowrap">
+                    {t.footer.companyName}
+                  </span>
+                  {t.hero.welcomeTo}
+                </>
+              )}
+            </h1>
 
-      {/* Gradient Blob for depth */}
-      <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[500px] h-[500px] bg-primary/20 rounded-full blur-3xl pointer-events-none" />
+            {/* Tagline badge */}
+            <div className="flex justify-center">
+              <span className="inline-block px-4 py-1.5 rounded-full border border-white/30 bg-white/10 backdrop-blur-sm text-white/80 text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase">
+                {t.footer.unitOf}
+              </span>
+            </div>
 
-      <main className="relative z-10 container mx-auto px-6 pt-28 pb-24 md:pt-20 md:pb-32 flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-        {/* Left Content */}
-        <div className="flex-1 text-center md:text-left space-y-8">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-serif font-semibold uppercase tracking-wider mx-auto md:mx-0">
-            <span>{t.hero.badge}</span>
-          </div>
-
-          {/* Heading */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-foreground leading-[1.15] tracking-tight font-serif">
-            {t.hero.heading} <br className="hidden lg:block" />
-            <span className="block min-h-[1.2em] font-serif text-primary">
+            <div className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-serif text-white/90 font-medium italic min-h-[1.2em]">
               <TypeAnimation
                 key={language}
                 sequence={t.hero.typeLabels.flatMap((label) => [label, 2000])}
@@ -46,48 +91,29 @@ const HeroSection = () => {
                 speed={50}
                 repeat={Infinity}
               />
-            </span>
-          </h1>
-          {/* Subtext */}
-          <p className="text-lg text-gray-9100 dark:text-gray-100 max-w-xl mx-auto md:mx-0 leading-relaxed">
+            </div>
+          </div>
+
+          <p className="text-lg md:text-xl lg:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed font-medium">
             {t.hero.subtext}
           </p>
-          {/* Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a
-              href="#contact"
-              className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-md bg-primary px-8 font-medium text-white transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 font-serif"
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center pt-6">
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="group h-12 md:h-14 px-8 md:px-10 rounded-full bg-primary text-white font-bold text-lg transition-all duration-300 hover:bg-primary/95 hover:shadow-[0_0_20px_rgba(var(--primary),0.3)] active:scale-95"
             >
-              <span className="mr-2">{t.hero.getQuote}</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </a>
-            <a
-              href="#tags"
-              className="inline-flex h-12 items-center justify-center rounded-md border border-input px-8 font-medium font-serif"
+              {t.hero.getQuote}
+            </button>
+            <button
+              onClick={() => scrollToSection("gallery")}
+              className="group h-12 md:h-14 px-8 md:px-10 rounded-full border-2 border-white/80 bg-white/5 backdrop-blur-sm text-white font-bold text-lg transition-all duration-300 hover:bg-white hover:text-black active:scale-95"
             >
               {t.hero.viewGallery}
-            </a>
+            </button>
           </div>
-          {/* Trust Indicators */}
-          <div className="pt-4 flex flex-wrap items-center justify-center md:justify-start gap-4 md:gap-6 text-sm text-gray-900 dark:text-gray-100 font-medium relative z-20">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-primary" />
-              <span>{t.hero.bulkOrders}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-primary" />
-              <span>{t.hero.customDesigns}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-primary" />
-              <span>{t.hero.fastShipping}</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Visuals - Spacer for 3D elements */}
-        <div className="flex-1 w-full max-w-[600px] hidden md:block" />
-      </main>
+        </motion.div>
+      </div>
     </div>
   );
 };

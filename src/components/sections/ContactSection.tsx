@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useLanguage } from "@/context/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 // Stable animation configs outside component
 const slideLeft = {
@@ -24,10 +25,11 @@ const viewportOpts = { once: true } as const;
 
 const ContactSection = memo(() => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const contactItems = [
-    { icon: Phone, title: t.contact.phone, details: ["+91 9873705056"] },
-    { icon: Mail, title: t.contact.email, details: ["arvinder22@gmail.com"] },
+    { icon: Phone, title: t.contact.phone, details: ["+91 9873705056","+91 7217667783"] },
+    { icon: Mail, title: t.contact.email, details: ["chawla@chawlalabel.com"] },
     {
       icon: MapPin,
       title: t.contact.address,
@@ -69,13 +71,20 @@ const ContactSection = memo(() => {
             <h3 className="font-display text-2xl font-semibold mb-6">
               {t.contact.sendMessage}
             </h3>
-            <form className="space-y-5">
+            <form
+              className="space-y-5"
+              onSubmit={(e) => {
+                e.preventDefault();
+                navigate("/thankyou");
+              }}
+            >
               <div className="grid sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">
                     {t.contact.name}
                   </label>
                   <Input
+                    required
                     placeholder={t.contact.namePlaceholder}
                     className="bg-background/50"
                   />
@@ -85,6 +94,7 @@ const ContactSection = memo(() => {
                     {t.contact.email}
                   </label>
                   <Input
+                    required
                     type="email"
                     placeholder={t.contact.emailPlaceholder}
                     className="bg-background/50"
@@ -105,12 +115,16 @@ const ContactSection = memo(() => {
                   {t.contact.message}
                 </label>
                 <Textarea
+                  required
                   placeholder={t.contact.messagePlaceholder}
                   rows={4}
                   className="bg-background/50 resize-none"
                 />
               </div>
-              <Button className="w-full gradient-bg text-primary-foreground hover:opacity-90 group">
+              <Button
+                type="submit"
+                className="w-full gradient-bg text-primary-foreground hover:opacity-90 group"
+              >
                 {t.contact.sendButton}
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
