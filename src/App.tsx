@@ -8,6 +8,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
 
 const WhatsAppButton = lazy(() => import("./components/WhatsAppButton"));
+import { CustomCursor } from "./components/ui/CustomCursor";
 
 const queryClient = new QueryClient();
 
@@ -15,6 +16,7 @@ const App = () => (
   <ThemeProvider defaultTheme="light" storageKey="app-theme">
     <LanguageProvider>
       <QueryClientProvider client={queryClient}>
+        <CustomCursor />
         <BrowserRouter>
           <Suspense
             fallback={

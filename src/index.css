@@ -145,6 +145,13 @@
     @apply border-border;
   }
 
+  /* Hide default cursor only on devices with a mouse/trackpad to avoid missing touch events on mobile */
+  @media (pointer: fine) {
+    * {
+      cursor: none !important;
+    }
+  }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: "Playfair Display", serif;
