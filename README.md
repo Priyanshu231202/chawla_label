@@ -53,4 +53,4 @@ Deployment
 The site is deployed on Vercel with automatic deployments on push to main. Configuration is defined in vercel.json.
 
 Built By
-Developed by Priyanshu Singh · WeGrow Consultancy & Solution
+Developed by @PriyanshuSingh · WeGrow Consultancy & Solution
