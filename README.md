@@ -1,74 +1,56 @@
-# Welcome to your Lovable project
+AS PRINTERS — Premium Clothing Labels & Tags
 
-## Project info
+Elevate your brand with custom clothing labels, hang tags, and stickers. Premium quality branding solutions for fashion brands worldwide.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+🌐 Live Site: chawla-label.vercel.app
 
-## How can I edit this code?
+About
+AS PRINTERS is a marketing and product showcase website built for a premium label and packaging manufacturer serving the fashion industry. The site highlights custom clothing labels, hang tags, woven labels, and sticker solutions for fashion brands.
 
-There are several ways of editing your application.
+Tech Stack
+LayerTechnologyFrameworkReact + TypeScriptBuild ToolViteStylingTailwind CSSUI Componentsshadcn/uiPackage ManagerBun / npmDeploymentVercel
 
-**Use Lovable**
+Getting Started
+Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+Node.js 18+ or Bun
 
-Changes made via Lovable will be committed automatically to this repo.
+Installation
+bash# Clone the repository
+git clone https://github.com/Priyanshu231202/chawla-label.git
+cd chawla-label
 
-**Use your preferred IDE**
+# Install dependencies
+npm install
+# or
+bun install
+Development
+bashnpm run dev
+# or
+bun dev
+Open http://localhost:5173 in your browser.
+Build
+bashnpm run build
+# or
+bun run build
+Preview Production Build
+bashnpm run preview
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+Project Structure
+chawla-label/
+├── public/          # Static assets
+├── src/             # Source files
+│   ├── components/  # Reusable UI components
+│   ├── pages/       # Page-level components
+│   └── assets/      # Images and media
+├── dist/            # Production build output
+├── index.html
+├── tailwind.config.ts
+├── vite.config.ts
+└── package.json
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Deployment
+The site is deployed on Vercel with automatic deployments on push to main. Configuration is defined in vercel.json.
 
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
-# CHAWALA-LABEL-CO_1
+Built By
+Developed by Priyanshu Singh · WeGrow Consultancy & Solution
